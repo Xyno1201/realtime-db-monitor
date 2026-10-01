@@ -1,0 +1,11 @@
+# Keep line endings correct on every machine, whatever the git settings:
+# Windows scripts need CRLF, Mac/Linux scripts need LF (otherwise "sh run.sh" fails).
+*.cmd   text eol=crlf
+*.sh    text eol=lf
+*.java  text
+*.sql   text
+*.md    text
+*.txt   text
+*.properties text
+*.png   binary
+*.jar   binary

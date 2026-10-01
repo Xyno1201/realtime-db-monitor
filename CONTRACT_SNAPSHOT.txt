@@ -1,0 +1,532 @@
+# CONTRACT SNAPSHOT - real public/protected signatures, generated with javap from the compiled code.
+# Regenerate after any change to a shared class (see HANDOFF.md section 7). Generated: 2026-10-01 (v8, Employee app)
+
+Compiled from "AdminFrame.java"
+public class dbmonitor.admin.AdminFrame extends javax.swing.JFrame {
+  public dbmonitor.admin.AdminFrame(dbmonitor.common.AppConfig, dbmonitor.db.AlertDAO, dbmonitor.db.ChangeDAO);
+  public void start();
+  void refreshAll(boolean);
+  void showStatus(java.lang.String, boolean);
+  void reportFailure(java.lang.String, java.lang.Throwable, boolean);
+  static {};
+}
+Compiled from "AdminMain.java"
+public class dbmonitor.admin.AdminMain {
+  public dbmonitor.admin.AdminMain();
+  public static void main(java.lang.String[]);
+}
+Compiled from "AlertTableModel.java"
+public class dbmonitor.admin.AlertTableModel extends javax.swing.table.AbstractTableModel {
+  static final int COL_ID;
+  static final int COL_TYPE;
+  static final int COL_SEVERITY;
+  static final int COL_SOURCE;
+  static final int COL_MESSAGE;
+  static final int COL_STATUS;
+  static final int COL_PUSHED;
+  static final int COL_CREATED;
+  public dbmonitor.admin.AlertTableModel();
+  public void setAlerts(java.util.List<dbmonitor.common.Alert>);
+  public dbmonitor.common.Alert getAlertAt(int);
+  public int rowOfId(int);
+  public int getRowCount();
+  public int getColumnCount();
+  public java.lang.String getColumnName(int);
+  public java.lang.Object getValueAt(int, int);
+  public boolean isCellEditable(int, int);
+  static {};
+}
+Compiled from "AlertsPanel.java"
+class dbmonitor.admin.AlertsPanel extends javax.swing.JPanel {
+  dbmonitor.admin.AlertsPanel(dbmonitor.admin.AdminFrame, dbmonitor.db.AlertDAO);
+  void setAlerts(java.util.List<dbmonitor.common.Alert>);
+  int count();
+}
+Compiled from "BroadcastLogPanel.java"
+class dbmonitor.admin.BroadcastLogPanel extends javax.swing.JPanel {
+  static final int ROWS_SHOWN;
+  dbmonitor.admin.BroadcastLogPanel();
+  void setEntries(java.util.List<dbmonitor.db.BroadcastLogEntry>);
+  int count();
+}
+Compiled from "BroadcastLogTableModel.java"
+public class dbmonitor.admin.BroadcastLogTableModel extends javax.swing.table.AbstractTableModel {
+  static final int COL_STATUS;
+  public dbmonitor.admin.BroadcastLogTableModel();
+  public void setEntries(java.util.List<dbmonitor.db.BroadcastLogEntry>);
+  public int getRowCount();
+  public int getColumnCount();
+  public java.lang.String getColumnName(int);
+  public java.lang.Object getValueAt(int, int);
+  public boolean isCellEditable(int, int);
+  static {};
+}
+Compiled from "ChangeTableModel.java"
+public class dbmonitor.admin.ChangeTableModel extends javax.swing.table.AbstractTableModel {
+  static final java.lang.String PENDING;
+  static final int COL_SUMMARY;
+  static final int COL_OUTCOME;
+  public dbmonitor.admin.ChangeTableModel();
+  public void setChanges(java.util.List<dbmonitor.rules.DataChange>);
+  public int getRowCount();
+  public int getColumnCount();
+  public java.lang.String getColumnName(int);
+  public java.lang.Object getValueAt(int, int);
+  public boolean isCellEditable(int, int);
+  static {};
+}
+Compiled from "ChangesPanel.java"
+class dbmonitor.admin.ChangesPanel extends javax.swing.JPanel {
+  static final int ROWS_SHOWN;
+  dbmonitor.admin.ChangesPanel();
+  void setChanges(java.util.List<dbmonitor.rules.DataChange>);
+  int count();
+}
+Compiled from "DbTask.java"
+abstract class dbmonitor.admin.DbTask<T> extends javax.swing.SwingWorker<T, java.lang.Void> {
+  dbmonitor.admin.DbTask(dbmonitor.admin.AdminFrame, java.lang.String, boolean);
+  protected abstract T work() throws java.sql.SQLException;
+  protected abstract void succeeded(T);
+  protected void always();
+  protected final T doInBackground() throws java.sql.SQLException;
+  protected final void done();
+}
+Compiled from "Renderers.java"
+final class dbmonitor.admin.Renderers {
+  static final java.awt.Color FLAG_NEW;
+  static final java.awt.Color FLAG_SENT;
+  static final java.awt.Color FLAG_RESOLVED;
+  static final java.awt.Color GREY;
+  static {};
+}
+Compiled from "RuleTableModel.java"
+public class dbmonitor.admin.RuleTableModel extends javax.swing.table.AbstractTableModel {
+  static final int COL_SEVERITY;
+  public dbmonitor.admin.RuleTableModel();
+  public void setRules(java.util.List<dbmonitor.rules.Rule>);
+  public int getRowCount();
+  public int getColumnCount();
+  public java.lang.String getColumnName(int);
+  public java.lang.Object getValueAt(int, int);
+  public boolean isCellEditable(int, int);
+  static {};
+}
+Compiled from "RulesPanel.java"
+class dbmonitor.admin.RulesPanel extends javax.swing.JPanel {
+  dbmonitor.admin.RulesPanel(dbmonitor.rules.RuleSet);
+  int count();
+}
+Compiled from "Alert.java"
+public abstract class dbmonitor.common.Alert implements java.io.Serializable {
+  public static final int MAX_SOURCE_LENGTH;
+  public static final int MAX_MESSAGE_LENGTH;
+  protected dbmonitor.common.Alert(int, dbmonitor.common.Severity, java.lang.String, java.lang.String, dbmonitor.common.AlertStatus, dbmonitor.common.AlertStatus, long) throws dbmonitor.common.InvalidAlertException;
+  public abstract java.lang.String getTypeCode();
+  public abstract java.lang.String getTypeLabel();
+  public abstract java.lang.String getIconText();
+  public abstract java.awt.Color getColor();
+  public abstract java.lang.String getDisplayMessage();
+  public boolean isResolved();
+  public boolean hasBeenPushed();
+  public java.util.Date getCreatedAt();
+  public java.lang.String getFormattedCreatedAt();
+  public int getId();
+  public dbmonitor.common.Severity getSeverity();
+  public java.lang.String getSource();
+  public java.lang.String getMessage();
+  public dbmonitor.common.AlertStatus getStatus();
+  public dbmonitor.common.AlertStatus getPushedStatus();
+  public long getCreatedAtMillis();
+  public java.lang.String toString();
+  static java.lang.String requireValidSource(java.lang.String) throws dbmonitor.common.InvalidAlertException;
+  static java.lang.String requireValidMessage(java.lang.String) throws dbmonitor.common.InvalidAlertException;
+}
+Compiled from "AlertFactory.java"
+public final class dbmonitor.common.AlertFactory {
+  public static dbmonitor.common.Alert create(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, long) throws dbmonitor.common.InvalidAlertException;
+  public static dbmonitor.common.Alert create(int, java.lang.String, dbmonitor.common.Severity, java.lang.String, java.lang.String, dbmonitor.common.AlertStatus, dbmonitor.common.AlertStatus, long) throws dbmonitor.common.InvalidAlertException;
+  public static void validateNewAlert(java.lang.String, dbmonitor.common.Severity, java.lang.String, java.lang.String) throws dbmonitor.common.InvalidAlertException;
+  public static java.lang.String normalizeType(java.lang.String) throws dbmonitor.common.InvalidAlertException;
+  public static java.lang.String typeForChange(java.lang.String) throws dbmonitor.common.InvalidAlertException;
+  public static boolean isKnownType(java.lang.String);
+  public static java.lang.String[] getKnownTypes();
+  static {};
+}
+Compiled from "AlertStatus.java"
+public final class dbmonitor.common.AlertStatus extends java.lang.Enum<dbmonitor.common.AlertStatus> {
+  public static final dbmonitor.common.AlertStatus NEW;
+  public static final dbmonitor.common.AlertStatus SENT;
+  public static final dbmonitor.common.AlertStatus RESOLVED;
+  public static dbmonitor.common.AlertStatus[] values();
+  public static dbmonitor.common.AlertStatus valueOf(java.lang.String);
+  public static dbmonitor.common.AlertStatus parse(java.lang.String) throws dbmonitor.common.InvalidAlertException;
+  public static dbmonitor.common.AlertStatus parseNullable(java.lang.String) throws dbmonitor.common.InvalidAlertException;
+  static {};
+}
+Compiled from "AppConfig.java"
+public final class dbmonitor.common.AppConfig {
+  public static final java.lang.String DEFAULT_PATH;
+  public static final java.lang.String KEY_DB_URL;
+  public static final java.lang.String KEY_DB_USER;
+  public static final java.lang.String KEY_DB_PASSWORD;
+  public static final java.lang.String KEY_SERVER_HOST;
+  public static final java.lang.String KEY_SERVER_PORT;
+  public static final java.lang.String KEY_SERVER_MAX_CLIENTS;
+  public static final java.lang.String KEY_POLL_INTERVAL_MS;
+  public static final java.lang.String KEY_CLIENT_RECONNECT_MS;
+  public static final java.lang.String KEY_ADMIN_REFRESH_MS;
+  public static final java.lang.String DEFAULT_DB_URL;
+  public static final java.lang.String DEFAULT_DB_USER;
+  public static final java.lang.String DEFAULT_DB_PASSWORD;
+  public static final java.lang.String DEFAULT_SERVER_HOST;
+  public static final int DEFAULT_SERVER_PORT;
+  public static final int DEFAULT_SERVER_MAX_CLIENTS;
+  public static final int DEFAULT_POLL_INTERVAL_MS;
+  public static final int DEFAULT_CLIENT_RECONNECT_MS;
+  public static final int DEFAULT_ADMIN_REFRESH_MS;
+  public static dbmonitor.common.AppConfig load(java.lang.String) throws java.io.IOException;
+  public static dbmonitor.common.AppConfig defaults();
+  public java.lang.String getDbUrl();
+  public java.lang.String getDbUser();
+  public java.lang.String getDbPassword();
+  public java.lang.String getServerHost();
+  public int getServerPort();
+  public int getServerMaxClients();
+  public int getPollIntervalMs();
+  public int getClientReconnectMs();
+  public int getAdminRefreshMs();
+  public java.lang.String getSource();
+  public java.lang.String describe();
+  public java.lang.String toString();
+  static {};
+}
+Compiled from "InvalidAlertException.java"
+public class dbmonitor.common.InvalidAlertException extends java.lang.Exception {
+  public dbmonitor.common.InvalidAlertException(java.lang.String);
+  public dbmonitor.common.InvalidAlertException(java.lang.String, java.lang.Throwable);
+}
+Compiled from "RecordAddedAlert.java"
+public class dbmonitor.common.RecordAddedAlert extends dbmonitor.common.Alert {
+  public static final java.lang.String TYPE_CODE;
+  public dbmonitor.common.RecordAddedAlert(int, dbmonitor.common.Severity, java.lang.String, java.lang.String, dbmonitor.common.AlertStatus, dbmonitor.common.AlertStatus, long) throws dbmonitor.common.InvalidAlertException;
+  public java.lang.String getTypeCode();
+  public java.lang.String getTypeLabel();
+  public java.lang.String getIconText();
+  public java.awt.Color getColor();
+  public java.lang.String getDisplayMessage();
+}
+Compiled from "RecordChangedAlert.java"
+public class dbmonitor.common.RecordChangedAlert extends dbmonitor.common.Alert {
+  public static final java.lang.String TYPE_CODE;
+  public dbmonitor.common.RecordChangedAlert(int, dbmonitor.common.Severity, java.lang.String, java.lang.String, dbmonitor.common.AlertStatus, dbmonitor.common.AlertStatus, long) throws dbmonitor.common.InvalidAlertException;
+  public java.lang.String getTypeCode();
+  public java.lang.String getTypeLabel();
+  public java.lang.String getIconText();
+  public java.awt.Color getColor();
+  public java.lang.String getDisplayMessage();
+}
+Compiled from "RecordDeletedAlert.java"
+public class dbmonitor.common.RecordDeletedAlert extends dbmonitor.common.Alert {
+  public static final java.lang.String TYPE_CODE;
+  public dbmonitor.common.RecordDeletedAlert(int, dbmonitor.common.Severity, java.lang.String, java.lang.String, dbmonitor.common.AlertStatus, dbmonitor.common.AlertStatus, long) throws dbmonitor.common.InvalidAlertException;
+  public java.lang.String getTypeCode();
+  public java.lang.String getTypeLabel();
+  public java.lang.String getIconText();
+  public java.awt.Color getColor();
+  public java.lang.String getDisplayMessage();
+}
+Compiled from "Severity.java"
+public final class dbmonitor.common.Severity extends java.lang.Enum<dbmonitor.common.Severity> {
+  public static final dbmonitor.common.Severity LOW;
+  public static final dbmonitor.common.Severity MEDIUM;
+  public static final dbmonitor.common.Severity HIGH;
+  public static final dbmonitor.common.Severity CRITICAL;
+  public static dbmonitor.common.Severity[] values();
+  public static dbmonitor.common.Severity valueOf(java.lang.String);
+  public java.lang.String getLabel();
+  public java.awt.Color getColor();
+  public static dbmonitor.common.Severity parse(java.lang.String) throws dbmonitor.common.InvalidAlertException;
+  static {};
+}
+Compiled from "AlertDAO.java"
+public class dbmonitor.db.AlertDAO implements java.lang.AutoCloseable {
+  public dbmonitor.db.AlertDAO(dbmonitor.common.AppConfig);
+  public synchronized int create(java.lang.String, dbmonitor.common.Severity, java.lang.String, java.lang.String) throws dbmonitor.common.InvalidAlertException, java.sql.SQLException;
+  public synchronized java.util.List<dbmonitor.common.Alert> readAll() throws java.sql.SQLException;
+  public synchronized java.util.List<dbmonitor.common.Alert> findUnpushed() throws java.sql.SQLException;
+  public synchronized int markSent(int) throws java.sql.SQLException;
+  public synchronized int setPushedStatus(int, dbmonitor.common.AlertStatus) throws java.sql.SQLException;
+  public synchronized int resolve(int) throws java.sql.SQLException;
+  public synchronized int purgeResolved() throws java.sql.SQLException;
+  public synchronized int deleteById(int) throws java.sql.SQLException;
+  public synchronized int logBroadcast(dbmonitor.common.Alert, int) throws java.sql.SQLException;
+  public synchronized java.util.List<dbmonitor.db.BroadcastLogEntry> readBroadcastLog(int) throws java.sql.SQLException;
+  public synchronized void close();
+}
+Compiled from "BroadcastLogEntry.java"
+public final class dbmonitor.db.BroadcastLogEntry {
+  public dbmonitor.db.BroadcastLogEntry(int, int, java.lang.String, java.lang.String, java.lang.String, java.lang.String, java.lang.String, int, long);
+  public int getLogId();
+  public int getAlertId();
+  public java.lang.String getType();
+  public java.lang.String getSeverity();
+  public java.lang.String getSource();
+  public java.lang.String getMessage();
+  public java.lang.String getBroadcastStatus();
+  public int getDashboardCount();
+  public long getBroadcastAtMillis();
+  public java.lang.String getFormattedBroadcastAt();
+  public java.lang.String toString();
+}
+Compiled from "ChangeDAO.java"
+public class dbmonitor.db.ChangeDAO implements java.lang.AutoCloseable {
+  public dbmonitor.db.ChangeDAO(dbmonitor.common.AppConfig);
+  public synchronized java.util.List<dbmonitor.rules.DataChange> findUnprocessed(int) throws java.sql.SQLException;
+  public synchronized java.util.List<dbmonitor.rules.DataChange> readRecent(int) throws java.sql.SQLException;
+  public synchronized int createAlertForChange(int, java.lang.String, dbmonitor.common.Severity, java.lang.String, java.lang.String) throws dbmonitor.common.InvalidAlertException, java.sql.SQLException;
+  public synchronized boolean markProcessedWithoutAlert(int, java.lang.String) throws java.sql.SQLException;
+  public synchronized void close();
+}
+Compiled from "InvalidProductException.java"
+public class dbmonitor.db.InvalidProductException extends java.lang.Exception {
+  public dbmonitor.db.InvalidProductException(java.lang.String);
+}
+Compiled from "ManagedConnection.java"
+public final class dbmonitor.db.ManagedConnection implements java.lang.AutoCloseable {
+  public dbmonitor.db.ManagedConnection(dbmonitor.common.AppConfig, java.lang.String);
+  public java.sql.Connection get() throws java.sql.SQLException;
+  public void close();
+}
+Compiled from "Product.java"
+public final class dbmonitor.db.Product {
+  public dbmonitor.db.Product(int, java.lang.String, java.lang.String, java.math.BigDecimal, int);
+  public int getId();
+  public java.lang.String getName();
+  public java.lang.String getCategory();
+  public java.math.BigDecimal getPrice();
+  public int getStock();
+  public java.lang.String toString();
+}
+Compiled from "ProductDAO.java"
+public class dbmonitor.db.ProductDAO implements java.lang.AutoCloseable {
+  public static final int MAX_NAME;
+  public static final int MAX_CATEGORY;
+  public dbmonitor.db.ProductDAO(dbmonitor.common.AppConfig);
+  public synchronized java.util.List<dbmonitor.db.Product> readAll() throws java.sql.SQLException;
+  public synchronized int create(java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws dbmonitor.db.InvalidProductException, java.sql.SQLException;
+  public synchronized int update(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws dbmonitor.db.InvalidProductException, java.sql.SQLException;
+  public synchronized int delete(int) throws java.sql.SQLException;
+  public synchronized void close();
+  static dbmonitor.db.Product validate(int, java.lang.String, java.lang.String, java.lang.String, java.lang.String) throws dbmonitor.db.InvalidProductException;
+  static {};
+}
+Compiled from "EmployeeFrame.java"
+public class dbmonitor.employee.EmployeeFrame extends javax.swing.JFrame {
+  public dbmonitor.employee.EmployeeFrame(dbmonitor.common.AppConfig, dbmonitor.db.ProductDAO);
+  public void start();
+  void refresh(boolean);
+  void showStatus(java.lang.String, boolean);
+  void reportFailure(java.lang.String, java.lang.Throwable, boolean);
+  static {};
+}
+Compiled from "EmployeeMain.java"
+public class dbmonitor.employee.EmployeeMain {
+  public dbmonitor.employee.EmployeeMain();
+  public static void main(java.lang.String[]);
+}
+Compiled from "EmployeeTask.java"
+abstract class dbmonitor.employee.EmployeeTask<T> extends javax.swing.SwingWorker<T, java.lang.Void> {
+  dbmonitor.employee.EmployeeTask(dbmonitor.employee.EmployeeFrame, java.lang.String, boolean);
+  protected abstract T work() throws java.sql.SQLException, dbmonitor.db.InvalidProductException;
+  protected abstract void succeeded(T);
+  protected void always();
+  protected final T doInBackground() throws java.sql.SQLException, dbmonitor.db.InvalidProductException;
+  protected final void done();
+}
+Compiled from "ProductTableModel.java"
+public class dbmonitor.employee.ProductTableModel extends javax.swing.table.AbstractTableModel {
+  public dbmonitor.employee.ProductTableModel();
+  public void setProducts(java.util.List<dbmonitor.db.Product>);
+  public dbmonitor.db.Product getProductAt(int);
+  public int rowOfId(int);
+  public int getRowCount();
+  public int getColumnCount();
+  public java.lang.String getColumnName(int);
+  public java.lang.Class<?> getColumnClass(int);
+  public java.lang.Object getValueAt(int, int);
+  public boolean isCellEditable(int, int);
+  static {};
+}
+Compiled from "ChangeType.java"
+public final class dbmonitor.rules.ChangeType extends java.lang.Enum<dbmonitor.rules.ChangeType> {
+  public static final dbmonitor.rules.ChangeType INSERT;
+  public static final dbmonitor.rules.ChangeType UPDATE;
+  public static final dbmonitor.rules.ChangeType DELETE;
+  public static dbmonitor.rules.ChangeType[] values();
+  public static dbmonitor.rules.ChangeType valueOf(java.lang.String);
+  public static dbmonitor.rules.ChangeType parseOrNull(java.lang.String);
+  static {};
+}
+Compiled from "DataChange.java"
+public final class dbmonitor.rules.DataChange {
+  public dbmonitor.rules.DataChange(int, java.lang.String, int, dbmonitor.rules.ChangeType, java.lang.String, long, java.util.Map<java.lang.String, dbmonitor.rules.FieldValue>, long, java.lang.String);
+  public int getChangeId();
+  public java.lang.String getTableName();
+  public int getRowId();
+  public dbmonitor.rules.ChangeType getType();
+  public java.lang.String getChangedBy();
+  public long getChangedAtMillis();
+  public java.util.Map<java.lang.String, dbmonitor.rules.FieldValue> getFields();
+  public dbmonitor.rules.FieldValue field(java.lang.String);
+  public boolean isProcessed();
+  public java.lang.String getOutcome();
+  public java.lang.String label(java.lang.String);
+  public java.lang.String summary();
+  public java.lang.String getFormattedChangedAt();
+  public java.lang.String toString();
+}
+Compiled from "DeltaRule.java"
+public class dbmonitor.rules.DeltaRule extends dbmonitor.rules.Rule {
+  public static final java.lang.String KEYWORD;
+  public dbmonitor.rules.DeltaRule(java.lang.String, java.lang.String, dbmonitor.common.Severity, java.lang.String, java.lang.String, java.math.BigDecimal);
+  protected java.lang.String check(dbmonitor.rules.DataChange);
+  public java.lang.String getTypeKeyword();
+  public java.lang.String describeCondition();
+}
+Compiled from "DetectionResult.java"
+public final class dbmonitor.rules.DetectionResult {
+  public dbmonitor.rules.DetectionResult(java.util.List<java.lang.String>, java.util.List<java.lang.String>, dbmonitor.common.Severity);
+  public boolean isAlert();
+  public dbmonitor.common.Severity getSeverity();
+  public java.util.List<java.lang.String> getReasons();
+  public java.util.List<java.lang.String> getMatchedRuleIds();
+  public java.lang.String reasonsText();
+}
+Compiled from "FieldChangedRule.java"
+public class dbmonitor.rules.FieldChangedRule extends dbmonitor.rules.Rule {
+  public static final java.lang.String KEYWORD;
+  public dbmonitor.rules.FieldChangedRule(java.lang.String, java.lang.String, dbmonitor.common.Severity, java.lang.String, java.util.List<java.lang.String>);
+  protected java.lang.String check(dbmonitor.rules.DataChange);
+  public java.util.List<java.lang.String> getFields();
+  public java.lang.String getTypeKeyword();
+  public java.lang.String describeCondition();
+}
+Compiled from "FieldValue.java"
+public final class dbmonitor.rules.FieldValue {
+  public dbmonitor.rules.FieldValue(java.lang.String, java.lang.String, java.lang.String);
+  public java.lang.String getField();
+  public java.lang.String getOldValue();
+  public java.lang.String getNewValue();
+  public boolean isChanged();
+  public java.math.BigDecimal oldNumber();
+  public java.math.BigDecimal newNumber();
+  public java.lang.String toString();
+}
+Compiled from "PercentDropRule.java"
+public class dbmonitor.rules.PercentDropRule extends dbmonitor.rules.Rule {
+  public static final java.lang.String KEYWORD;
+  public dbmonitor.rules.PercentDropRule(java.lang.String, java.lang.String, dbmonitor.common.Severity, java.lang.String, java.lang.String, java.math.BigDecimal, java.math.BigDecimal);
+  protected java.lang.String check(dbmonitor.rules.DataChange);
+  public java.lang.String getTypeKeyword();
+  public java.lang.String describeCondition();
+}
+Compiled from "PercentRiseRule.java"
+public class dbmonitor.rules.PercentRiseRule extends dbmonitor.rules.Rule {
+  public static final java.lang.String KEYWORD;
+  public dbmonitor.rules.PercentRiseRule(java.lang.String, java.lang.String, dbmonitor.common.Severity, java.lang.String, java.lang.String, java.math.BigDecimal, java.math.BigDecimal);
+  protected java.lang.String check(dbmonitor.rules.DataChange);
+  public java.lang.String getTypeKeyword();
+  public java.lang.String describeCondition();
+}
+Compiled from "ProductRules.java"
+public final class dbmonitor.rules.ProductRules {
+  public static final java.lang.String TABLE;
+  public static final java.lang.String LABEL_FIELD;
+  public static dbmonitor.rules.RuleSet create();
+}
+Compiled from "RecordDeletedRule.java"
+public class dbmonitor.rules.RecordDeletedRule extends dbmonitor.rules.Rule {
+  public static final java.lang.String KEYWORD;
+  public dbmonitor.rules.RecordDeletedRule(java.lang.String, java.lang.String, dbmonitor.common.Severity, java.lang.String);
+  protected java.lang.String check(dbmonitor.rules.DataChange);
+  public java.lang.String getTypeKeyword();
+  public java.lang.String describeCondition();
+}
+Compiled from "RecordInsertedRule.java"
+public class dbmonitor.rules.RecordInsertedRule extends dbmonitor.rules.Rule {
+  public static final java.lang.String KEYWORD;
+  public dbmonitor.rules.RecordInsertedRule(java.lang.String, java.lang.String, dbmonitor.common.Severity, java.lang.String);
+  protected java.lang.String check(dbmonitor.rules.DataChange);
+  public java.lang.String getTypeKeyword();
+  public java.lang.String describeCondition();
+}
+Compiled from "Rule.java"
+public abstract class dbmonitor.rules.Rule {
+  public static final java.lang.String ANY_TABLE;
+  protected dbmonitor.rules.Rule(java.lang.String, java.lang.String, dbmonitor.common.Severity, java.lang.String);
+  public final java.lang.String evaluate(dbmonitor.rules.DataChange);
+  protected abstract java.lang.String check(dbmonitor.rules.DataChange);
+  public abstract java.lang.String getTypeKeyword();
+  public abstract java.lang.String describeCondition();
+  public java.lang.String getId();
+  public java.lang.String getTable();
+  public dbmonitor.common.Severity getSeverity();
+  public java.lang.String getDescription();
+  public java.lang.String toString();
+  protected static java.math.BigDecimal percentChange(java.math.BigDecimal, java.math.BigDecimal);
+  protected static java.lang.String formatPercent(java.math.BigDecimal);
+  protected static java.lang.String plain(java.math.BigDecimal);
+}
+Compiled from "RuleSet.java"
+public final class dbmonitor.rules.RuleSet {
+  public dbmonitor.rules.RuleSet(java.util.List<dbmonitor.rules.Rule>, java.util.Map<java.lang.String, java.lang.String>);
+  public dbmonitor.rules.DetectionResult evaluate(dbmonitor.rules.DataChange);
+  public java.lang.String labelFieldFor(java.lang.String);
+  public java.util.List<dbmonitor.rules.Rule> getRules();
+  public java.lang.String toString();
+}
+Compiled from "ThresholdRule.java"
+public class dbmonitor.rules.ThresholdRule extends dbmonitor.rules.Rule {
+  public static final java.lang.String KEYWORD;
+  public dbmonitor.rules.ThresholdRule(java.lang.String, java.lang.String, dbmonitor.common.Severity, java.lang.String, java.lang.String, java.lang.String, java.math.BigDecimal, boolean);
+  public static boolean isValidOperator(java.lang.String);
+  protected java.lang.String check(dbmonitor.rules.DataChange);
+  public java.lang.String getTypeKeyword();
+  public java.lang.String describeCondition();
+}
+Compiled from "BroadcastServer.java"
+public class dbmonitor.server.BroadcastServer {
+  public dbmonitor.server.BroadcastServer(int, int);
+  public synchronized void start() throws java.io.IOException;
+  public void broadcast(dbmonitor.common.Alert);
+  public int clientCount();
+  void removeClient(dbmonitor.server.ClientHandler);
+  public synchronized void stop();
+}
+Compiled from "ChangeDetectorThread.java"
+public class dbmonitor.server.ChangeDetectorThread extends java.lang.Thread {
+  public dbmonitor.server.ChangeDetectorThread(dbmonitor.db.ChangeDAO, dbmonitor.rules.RuleSet, long);
+  public void run();
+  public int detectOnce() throws java.sql.SQLException;
+  public dbmonitor.rules.RuleSet getRules();
+  public void shutdown();
+}
+Compiled from "ClientHandler.java"
+public class dbmonitor.server.ClientHandler implements java.lang.Runnable {
+  public dbmonitor.server.ClientHandler(java.net.Socket, dbmonitor.server.BroadcastServer);
+  public void enqueue(dbmonitor.common.Alert);
+  public void run();
+  void close();
+  public java.lang.String getName();
+}
+Compiled from "PollerThread.java"
+public class dbmonitor.server.PollerThread extends java.lang.Thread {
+  public dbmonitor.server.PollerThread(dbmonitor.db.AlertDAO, dbmonitor.server.BroadcastServer, long);
+  public void run();
+  public void shutdown();
+}
+Compiled from "ServerMain.java"
+public class dbmonitor.server.ServerMain {
+  public dbmonitor.server.ServerMain();
+  public static void main(java.lang.String[]);
+}

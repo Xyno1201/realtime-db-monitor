@@ -1,0 +1,16 @@
+# Build output - every machine builds its own (build.cmd / build.sh)
+out/
+
+# The MySQL driver jar is NOT in the repo: each person downloads it (TEAMMATE_SETUP.md, Step 6)
+lib/*.jar
+
+# Leftovers from update zips
+DELETE-THESE-FIRST.txt
+
+# Editors / OS
+.vscode/
+.idea/
+*.iml
+.DS_Store
+Thumbs.db
+desktop.ini
