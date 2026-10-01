@@ -1,5 +1,5 @@
 # CONTRACT SNAPSHOT - real public/protected signatures, generated with javap from the compiled code.
-# Regenerate after any change to a shared class (see HANDOFF.md section 7). Generated: 2026-10-01 (v8, Employee app)
+# Regenerate after any change to a shared class (see HANDOFF.md section 7). Generated: 2026-10-01 (v8, + Swing dashboard dbmonitor.client)
 
 Compiled from "AdminFrame.java"
 public class dbmonitor.admin.AdminFrame extends javax.swing.JFrame {
@@ -115,6 +115,33 @@ Compiled from "RulesPanel.java"
 class dbmonitor.admin.RulesPanel extends javax.swing.JPanel {
   dbmonitor.admin.RulesPanel(dbmonitor.rules.RuleSet);
   int count();
+}
+Compiled from "AlertCard.java"
+public class dbmonitor.client.AlertCard extends javax.swing.JPanel {
+  public dbmonitor.client.AlertCard(dbmonitor.common.Alert);
+  public final void update(dbmonitor.common.Alert);
+  public dbmonitor.common.Alert getAlert();
+  static {};
+}
+Compiled from "AlertListenerThread.java"
+public class dbmonitor.client.AlertListenerThread extends java.lang.Thread {
+  public dbmonitor.client.AlertListenerThread(java.lang.String, int, int, dbmonitor.client.DashboardFrame);
+  public void run();
+  public void shutdown();
+}
+Compiled from "ClientMain.java"
+public class dbmonitor.client.ClientMain {
+  public dbmonitor.client.ClientMain();
+  public static void main(java.lang.String[]);
+}
+Compiled from "DashboardFrame.java"
+public class dbmonitor.client.DashboardFrame extends javax.swing.JFrame {
+  public dbmonitor.client.DashboardFrame(java.lang.String, int);
+  public void showAlert(dbmonitor.common.Alert);
+  public void showConnecting();
+  public void showConnected();
+  public void showReconnecting(java.lang.String, int);
+  static {};
 }
 Compiled from "Alert.java"
 public abstract class dbmonitor.common.Alert implements java.io.Serializable {

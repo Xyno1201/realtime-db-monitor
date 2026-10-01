@@ -31,7 +31,7 @@ A 2nd-year Java mini-project. The system **watches a real company table** (`prod
 | Server | Checks new changes every 2 s → creates alerts → pushes them to all dashboards → logs each push. |
 | Employee app | A separate window, *Product Catalogue - Employee*: search, sort, **Add / Save Changes / Delete** products. It knows nothing about alerts. It's just the business app, and its edits are monitored like anyone else's. |
 | Admin | A separate window with 4 tabs: **Alerts** (Resolve / Purge / Delete), **Changes** (what the triggers recorded + what the rules decided), **Rules** (read-only list), **Broadcast Log**. |
-| Dashboard | `run dashboard` is a text-only test dashboard. The real Swing dashboard is Builder B's task (HANDOFF §6). |
+| Dashboard | `run client`: the Swing dashboard. One coloured card per alert, newest at the top; a repeated alert updates its card, and a resolved alert turns grey and stays visible. Counters per severity (open alerts) + Resolved + Total. Shows *Connected* / *Reconnecting* and reconnects by itself. Run several. (`run dashboard` is still the text-only test dashboard.) |
 
 ### The rules
 
@@ -61,16 +61,17 @@ Windows (cmd, or the PowerShell terminal in Antigravity/VS Code). Open a **separ
 .\run.cmd server            terminal 1 - leave running
 .\run.cmd admin             terminal 2 - the operator console (monitoring)
 .\run.cmd employee          terminal 3 - the Employee app (product catalogue)
-.\run.cmd dashboard         terminal 4+ - text dashboards (optional, run several)
+.\run.cmd client            terminal 4+ - Swing dashboards (run several)
+.\run.cmd dashboard         optional    - text-only test dashboard
 ```
 
-macOS/Linux: `sh build.sh`, then `sh run.sh checks | server | admin | employee | dashboard`.
+macOS/Linux: `sh build.sh`, then `sh run.sh checks | server | admin | employee | client | dashboard`.
 
 ## 3-minute demo
 
 Before the demo, run `sql\reset-demo.sql` in Workbench for a clean start: the 20 original products and no alerts.
 
-1. Start `server`, `admin`, `employee` and one or two `dashboard`s.
+1. Start `server`, `admin`, `employee` and two or three `client`s (Swing dashboards).
 2. **In Workbench**, make "unauthorised" edits, one at a time:
    ```sql
    UPDATE alert_monitor.products SET price = 49 WHERE id = 3;     -- R2: price -99%      -> CRITICAL
@@ -81,10 +82,11 @@ Before the demo, run `sql\reset-demo.sql` in Workbench for a clean start: the 20
    Within about 2 s, each one appears on every dashboard and in the Admin's **Alerts** tab, marked *by root@localhost*.
 3. Open the **Changes** tab. Every edit is listed with old → new values, who made it, and the outcome (`ALERT #n (SEVERITY)` or `No rule matched`).
 4. In the **Employee app**, type `coffee` in Search, select *Coffee Beans*, set the price to `500`, and click **Save Changes**. The employee just sees "saved", but the Admin and the dashboards get a CRITICAL alert, this time *by alertapp@localhost* (the Employee app). Now try a price of `-5`: the app refuses it. Workbench didn't refuse `-10`, and that's exactly why the monitor exists.
-5. Select an alert and click **Resolve**. The dashboards print the RESOLVED update, and the **Broadcast Log** tab shows both pushes.
+5. Select an alert and click **Resolve**. On every dashboard the same card turns grey (RESOLVED, no new card) and the counters change, and the **Broadcast Log** tab shows both pushes.
 6. Optional failure demos:
    - Stop MySQL (Windows: Services → MySQL80 → Stop). The Admin shows a red database error and the server logs a warning. Start MySQL again, and both recover without a restart.
    - Close the server and keep editing in Workbench. The changes wait in `data_changes` (outcome *waiting for the server...*). Start the server, and they are all processed.
+   - While the server is closed, the dashboards show *Reconnecting* in orange and keep their cards. When the server is started again, they reconnect by themselves (*Connected*, green).
 
 ## Layout
 
