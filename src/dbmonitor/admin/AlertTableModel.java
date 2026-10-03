@@ -4,6 +4,8 @@ import dbmonitor.common.Alert;
 
 import javax.swing.table.AbstractTableModel;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 /**
@@ -28,15 +30,45 @@ public class AlertTableModel extends AbstractTableModel {
     static final int COL_PUSHED = 6;
     static final int COL_CREATED = 7;
 
+    public enum SortOrder {
+        NONE("No Sorting"),
+        HIGH_PRIORITY_FIRST("High priority first"),
+        LOW_PRIORITY_FIRST("Low priority first");
+
+        private final String label;
+
+        SortOrder(String label) {
+            this.label = label;
+        }
+
+        @Override
+        public String toString() {
+            return label;
+        }
+    }
+
     private static final String[] COLUMN_NAMES = {
             "ID", "Type", "Severity", "Source", "Message", "Status", "Pushed status", "Created"
     };
 
+    private List<Alert> sourceAlerts = new ArrayList<Alert>();
     private List<Alert> alerts = new ArrayList<Alert>();
+    private SortOrder sortOrder = SortOrder.NONE;
 
     /** Replaces all rows and redraws the table. */
     public void setAlerts(List<Alert> newAlerts) {
-        this.alerts = new ArrayList<Alert>(newAlerts);
+        this.sourceAlerts = new ArrayList<Alert>(newAlerts);
+        sortAlerts();
+        fireTableDataChanged();
+    }
+
+    /** Changes the display order without changing the alerts stored in the database. */
+    public void setSortOrder(SortOrder sortOrder) {
+        if (sortOrder == null) {
+            throw new IllegalArgumentException("Sort order cannot be null");
+        }
+        this.sortOrder = sortOrder;
+        sortAlerts();
         fireTableDataChanged();
     }
 
@@ -97,5 +129,19 @@ public class AlertTableModel extends AbstractTableModel {
     @Override
     public boolean isCellEditable(int row, int column) {
         return false;   // changes go through the buttons (and the DAO), never by typing in the table
+    }
+
+    private void sortAlerts() {
+        alerts = new ArrayList<Alert>(sourceAlerts);
+        if (sortOrder == SortOrder.NONE) {
+            return;
+        }
+        final int direction = sortOrder == SortOrder.HIGH_PRIORITY_FIRST ? -1 : 1;
+        Collections.sort(alerts, new Comparator<Alert>() {
+            @Override
+            public int compare(Alert first, Alert second) {
+                return direction * first.getSeverity().compareTo(second.getSeverity());
+            }
+        });
     }
 }
