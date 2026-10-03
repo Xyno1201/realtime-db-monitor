@@ -30,7 +30,7 @@ A 2nd-year Java mini-project. The system **watches a real company table** (`prod
 | Rules | 10 fixed rules (R1–R10) in `src/dbmonitor/rules/ProductRules.java`. One change → at most one alert, with the highest severity of all the rules it matched. |
 | Server | Checks new changes every 2 s → creates alerts → pushes them to all dashboards → logs each push. |
 | Employee app | A separate window, *Product Catalogue - Employee*: search, sort, **Add / Save Changes / Delete** products. It knows nothing about alerts. It's just the business app, and its edits are monitored like anyone else's. |
-| Admin | A separate window with 4 tabs: **Alerts** (Resolve / Purge / Delete), **Changes** (what the triggers recorded + what the rules decided), **Rules** (read-only list), **Broadcast Log**. |
+| Admin | A separate window with 4 tabs: **Alerts** (sort by priority, Resolve / Purge / Delete), **Changes** (what the triggers recorded + what the rules decided), **Rules** (read-only list), **Broadcast Log**. |
 | Dashboard | `run dashboard` is a text-only test dashboard. The real Swing dashboard is Builder B's task (HANDOFF §6). |
 
 ### The rules
