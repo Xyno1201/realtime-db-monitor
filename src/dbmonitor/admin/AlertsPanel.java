@@ -5,6 +5,7 @@ import dbmonitor.db.AlertDAO;
 
 import javax.swing.BorderFactory;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
@@ -35,6 +36,8 @@ class AlertsPanel extends JPanel {
     private final transient AlertDAO dao;
     private final AlertTableModel model = new AlertTableModel();
     private final JTable table = new JTable(model);
+    private final JComboBox<AlertTableModel.SortOrder> sortSelector =
+            new JComboBox<AlertTableModel.SortOrder>(AlertTableModel.SortOrder.values());
     private int selectAfterRefresh = -1;   // EDT only
 
     AlertsPanel(AdminFrame frame, AlertDAO dao) {
@@ -72,6 +75,14 @@ class AlertsPanel extends JPanel {
                 AlertsPanel.this.frame.refreshAll(true);
             }
         }));
+        buttons.add(new JLabel("Sort alerts:"));
+        sortSelector.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                applySortOrder((AlertTableModel.SortOrder) sortSelector.getSelectedItem());
+            }
+        });
+        buttons.add(sortSelector);
         buttons.add(button("UPDATE: Resolve", new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -104,6 +115,17 @@ class AlertsPanel extends JPanel {
         int row = id > 0 ? model.rowOfId(id) : -1;
         if (row >= 0) {
             table.setRowSelectionInterval(row, row);
+        }
+    }
+
+    private void applySortOrder(AlertTableModel.SortOrder sortOrder) {
+        Alert selected = selected(null);
+        model.setSortOrder(sortOrder);
+        if (selected != null) {
+            int row = model.rowOfId(selected.getId());
+            if (row >= 0) {
+                table.setRowSelectionInterval(row, row);
+            }
         }
     }
 
