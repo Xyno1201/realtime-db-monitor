@@ -1,0 +1,196 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="960" viewBox="0 0 1500 960">
+<rect width="1500" height="960" fill="#fff"/>
+<rect x="10" y="10" width="1480" height="940" fill="none" stroke="#000" stroke-width="1.6"/>
+<text x="750" y="42" font-size="21" text-anchor="middle" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">ER Diagram — MySQL database alert_monitor</text>
+<text x="750" y="68" font-size="13" text-anchor="middle" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">5 tables · created by sql/setup.sql · crow&#x27;s-foot notation</text>
+<rect x="50" y="110" width="360" height="153" fill="#fff" stroke="#bd7000" stroke-width="1.5"/>
+<rect x="50" y="110" width="360" height="38" fill="#f0a30a" stroke="#bd7000" stroke-width="1.5"/>
+<text x="230" y="129" font-size="15.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">products</text>
+<text x="60" y="159.5" font-size="11" text-anchor="start" font-weight="bold" font-style="normal" fill="#b45309" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">PK</text>
+<text x="98" y="159.5" font-size="12.5" text-anchor="start" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">id</text>
+<text x="400" y="159.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">INT AUTO_INCREMENT</text>
+<rect x="51" y="171" width="358" height="23" fill="#fff6e8"/>
+<text x="98" y="182.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">name</text>
+<text x="400" y="182.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(100)</text>
+<text x="98" y="205.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">category</text>
+<text x="400" y="205.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(50)</text>
+<rect x="51" y="217" width="358" height="23" fill="#fff6e8"/>
+<text x="98" y="228.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">price</text>
+<text x="400" y="228.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">DECIMAL(10,2)</text>
+<text x="98" y="251.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">stock</text>
+<text x="400" y="251.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">INT</text>
+<line x1="92" y1="148" x2="92" y2="263" stroke="#bd7000"/>
+<rect x="560" y="110" width="360" height="222" fill="#fff" stroke="#bd7000" stroke-width="1.5"/>
+<rect x="560" y="110" width="360" height="38" fill="#f0a30a" stroke="#bd7000" stroke-width="1.5"/>
+<text x="740" y="129" font-size="15.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">data_changes</text>
+<text x="570" y="159.5" font-size="11" text-anchor="start" font-weight="bold" font-style="normal" fill="#b45309" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">PK</text>
+<text x="608" y="159.5" font-size="12.5" text-anchor="start" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">change_id</text>
+<text x="910" y="159.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">INT AUTO_INCREMENT</text>
+<rect x="561" y="171" width="358" height="23" fill="#fff6e8"/>
+<text x="608" y="182.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">table_name</text>
+<text x="910" y="182.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(64)</text>
+<text x="570" y="205.5" font-size="11" text-anchor="start" font-weight="bold" font-style="normal" fill="#b45309" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">→</text>
+<text x="608" y="205.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">row_id</text>
+<text x="910" y="205.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">INT  (product id)</text>
+<rect x="561" y="217" width="358" height="23" fill="#fff6e8"/>
+<text x="608" y="228.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">change_type</text>
+<text x="910" y="228.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">INSERT|UPDATE|DELETE</text>
+<text x="608" y="251.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">changed_by</text>
+<text x="910" y="251.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(100)  USER()</text>
+<rect x="561" y="263" width="358" height="23" fill="#fff6e8"/>
+<text x="608" y="274.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">changed_at</text>
+<text x="910" y="274.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">TIMESTAMP</text>
+<text x="608" y="297.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">processed_at</text>
+<text x="910" y="297.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">TIMESTAMP  NULL</text>
+<rect x="561" y="309" width="358" height="23" fill="#fff6e8"/>
+<text x="608" y="320.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">outcome</text>
+<text x="910" y="320.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(255)  NULL</text>
+<line x1="602" y1="148" x2="602" y2="332" stroke="#bd7000"/>
+<rect x="1090" y="110" width="360" height="130" fill="#fff" stroke="#bd7000" stroke-width="1.5"/>
+<rect x="1090" y="110" width="360" height="38" fill="#f0a30a" stroke="#bd7000" stroke-width="1.5"/>
+<text x="1270" y="129" font-size="15.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">data_change_values</text>
+<text x="1100" y="159.5" font-size="11" text-anchor="start" font-weight="bold" font-style="normal" fill="#b45309" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">PK →</text>
+<text x="1138" y="159.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">change_id</text>
+<text x="1440" y="159.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">INT</text>
+<rect x="1091" y="171" width="358" height="23" fill="#fff6e8"/>
+<text x="1100" y="182.5" font-size="11" text-anchor="start" font-weight="bold" font-style="normal" fill="#b45309" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">PK</text>
+<text x="1138" y="182.5" font-size="12.5" text-anchor="start" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">field_name</text>
+<text x="1440" y="182.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(64)</text>
+<text x="1138" y="205.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">old_value</text>
+<text x="1440" y="205.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(255)  NULL</text>
+<rect x="1091" y="217" width="358" height="23" fill="#fff6e8"/>
+<text x="1138" y="228.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">new_value</text>
+<text x="1440" y="228.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(255)  NULL</text>
+<line x1="1132" y1="148" x2="1132" y2="240" stroke="#bd7000"/>
+<rect x="560" y="500" width="360" height="222" fill="#fff" stroke="#bd7000" stroke-width="1.5"/>
+<rect x="560" y="500" width="360" height="38" fill="#f0a30a" stroke="#bd7000" stroke-width="1.5"/>
+<text x="740" y="519" font-size="15.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">alerts</text>
+<text x="570" y="549.5" font-size="11" text-anchor="start" font-weight="bold" font-style="normal" fill="#b45309" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">PK</text>
+<text x="608" y="549.5" font-size="12.5" text-anchor="start" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">id</text>
+<text x="910" y="549.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">INT AUTO_INCREMENT</text>
+<rect x="561" y="561" width="358" height="23" fill="#fff6e8"/>
+<text x="608" y="572.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">type</text>
+<text x="910" y="572.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">RECORD_ADDED|CHANGED|DELETED</text>
+<text x="608" y="595.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">severity</text>
+<text x="910" y="595.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">LOW|MEDIUM|HIGH|CRITICAL</text>
+<rect x="561" y="607" width="358" height="23" fill="#fff6e8"/>
+<text x="608" y="618.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">source</text>
+<text x="910" y="618.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(50)</text>
+<text x="608" y="641.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">message</text>
+<text x="910" y="641.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(255)</text>
+<rect x="561" y="653" width="358" height="23" fill="#fff6e8"/>
+<text x="608" y="664.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">status</text>
+<text x="910" y="664.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">NEW|SENT|RESOLVED</text>
+<text x="608" y="687.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">pushed_status</text>
+<text x="910" y="687.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(20)  NULL</text>
+<rect x="561" y="699" width="358" height="23" fill="#fff6e8"/>
+<text x="608" y="710.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">created_at</text>
+<text x="910" y="710.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">TIMESTAMP</text>
+<line x1="602" y1="538" x2="602" y2="722" stroke="#bd7000"/>
+<rect x="1090" y="500" width="360" height="245" fill="#fff" stroke="#bd7000" stroke-width="1.5"/>
+<rect x="1090" y="500" width="360" height="38" fill="#f0a30a" stroke="#bd7000" stroke-width="1.5"/>
+<text x="1270" y="519" font-size="15.5" text-anchor="middle" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">alert_broadcast_log</text>
+<text x="1100" y="549.5" font-size="11" text-anchor="start" font-weight="bold" font-style="normal" fill="#b45309" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">PK</text>
+<text x="1138" y="549.5" font-size="12.5" text-anchor="start" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">log_id</text>
+<text x="1440" y="549.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">INT AUTO_INCREMENT</text>
+<rect x="1091" y="561" width="358" height="23" fill="#fff6e8"/>
+<text x="1100" y="572.5" font-size="11" text-anchor="start" font-weight="bold" font-style="normal" fill="#b45309" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">→</text>
+<text x="1138" y="572.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">alert_id</text>
+<text x="1440" y="572.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">INT  (alert id)</text>
+<text x="1138" y="595.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">type</text>
+<text x="1440" y="595.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(30)</text>
+<rect x="1091" y="607" width="358" height="23" fill="#fff6e8"/>
+<text x="1138" y="618.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">severity</text>
+<text x="1440" y="618.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(20)</text>
+<text x="1138" y="641.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">source</text>
+<text x="1440" y="641.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(50)</text>
+<rect x="1091" y="653" width="358" height="23" fill="#fff6e8"/>
+<text x="1138" y="664.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">message</text>
+<text x="1440" y="664.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(255)</text>
+<text x="1138" y="687.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">broadcast_status</text>
+<text x="1440" y="687.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">VARCHAR(20)</text>
+<rect x="1091" y="699" width="358" height="23" fill="#fff6e8"/>
+<text x="1138" y="710.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">dashboard_count</text>
+<text x="1440" y="710.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">INT</text>
+<text x="1138" y="733.5" font-size="12.5" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">broadcast_at</text>
+<text x="1440" y="733.5" font-size="11.5" text-anchor="end" font-weight="normal" font-style="normal" fill="#555" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">TIMESTAMP</text>
+<line x1="1132" y1="538" x2="1132" y2="745" stroke="#bd7000"/>
+<path d="M410,159.5 L490,159.5 L490,205.5 L560,205.5" fill="none" stroke="#000" stroke-width="1.4" stroke-dasharray="7,4"/>
+<text x="490" y="129.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif" font-style="italic" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">every change to a</text>
+<text x="490" y="144.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif" font-style="italic" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">product is recorded</text>
+<line x1="418" y1="151.5" x2="418" y2="167.5" stroke="#000" stroke-width="1.4"/>
+<line x1="424" y1="151.5" x2="424" y2="167.5" stroke="#000" stroke-width="1.4"/>
+<line x1="544" y1="205.5" x2="560" y2="196.5" stroke="#000" stroke-width="1.4"/>
+<line x1="544" y1="205.5" x2="560" y2="205.5" stroke="#000" stroke-width="1.4"/>
+<line x1="544" y1="205.5" x2="560" y2="214.5" stroke="#000" stroke-width="1.4"/>
+<circle cx="536" cy="205.5" r="5" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<path d="M920,159.5 L1090,159.5" fill="none" stroke="#000" stroke-width="1.4" stroke-dasharray="7,4"/>
+<text x="1005" y="129.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif" font-style="italic" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">one row per column</text>
+<text x="1005" y="144.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif" font-style="italic" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">(old → new value)</text>
+<line x1="928" y1="151.5" x2="928" y2="167.5" stroke="#000" stroke-width="1.4"/>
+<line x1="934" y1="151.5" x2="934" y2="167.5" stroke="#000" stroke-width="1.4"/>
+<line x1="1074" y1="159.5" x2="1090" y2="150.5" stroke="#000" stroke-width="1.4"/>
+<line x1="1074" y1="159.5" x2="1090" y2="159.5" stroke="#000" stroke-width="1.4"/>
+<line x1="1074" y1="159.5" x2="1090" y2="168.5" stroke="#000" stroke-width="1.4"/>
+<line x1="1068" y1="167.5" x2="1068" y2="151.5" stroke="#000" stroke-width="1.4"/>
+<path d="M740,332 L740,500" fill="none" stroke="#000" stroke-width="1.4" stroke-dasharray="7,4"/>
+<text x="750" y="408" font-size="12" text-anchor="start" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif" font-style="italic" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">a change becomes at most one alert</text>
+<text x="750" y="423" font-size="12" text-anchor="start" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif" font-style="italic" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">(outcome = &quot;ALERT #id (SEVERITY)&quot;)</text>
+<line x1="748" y1="340" x2="732" y2="340" stroke="#000" stroke-width="1.4"/>
+<line x1="748" y1="346" x2="732" y2="346" stroke="#000" stroke-width="1.4"/>
+<line x1="732" y1="492" x2="748" y2="492" stroke="#000" stroke-width="1.4"/>
+<circle cx="740" cy="480" r="5" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<path d="M920,549.5 L1010,549.5 L1010,572.5 L1090,572.5" fill="none" stroke="#000" stroke-width="1.4" stroke-dasharray="7,4"/>
+<text x="1010" y="519.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif" font-style="italic" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">every push</text>
+<text x="1010" y="534.5" font-size="12" text-anchor="middle" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif" font-style="italic" paint-order="stroke" stroke="#fff" stroke-width="4" stroke-linejoin="round">is logged</text>
+<line x1="928" y1="541.5" x2="928" y2="557.5" stroke="#000" stroke-width="1.4"/>
+<line x1="934" y1="541.5" x2="934" y2="557.5" stroke="#000" stroke-width="1.4"/>
+<line x1="1074" y1="572.5" x2="1090" y2="563.5" stroke="#000" stroke-width="1.4"/>
+<line x1="1074" y1="572.5" x2="1090" y2="572.5" stroke="#000" stroke-width="1.4"/>
+<line x1="1074" y1="572.5" x2="1090" y2="581.5" stroke="#000" stroke-width="1.4"/>
+<circle cx="1066" cy="572.5" r="5" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<rect x="50" y="290" width="400" height="150" fill="#fff2cc" stroke="#d6b656" stroke-width="1.3" rx="3"/>
+<text x="62" y="308" font-size="13" text-anchor="start" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">Triggers on products (3)</text>
+<text x="62" y="332" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">AFTER INSERT / UPDATE / DELETE on products:</text>
+<text x="62" y="350" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">• insert 1 row into data_changes (who = USER())</text>
+<text x="62" y="368" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">• insert 4 rows into data_change_values</text>
+<text x="62" y="386" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">• an UPDATE that changes nothing is skipped (&lt;=&gt;)</text>
+<text x="62" y="404" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">Runs inside MySQL — catches edits from any tool.</text>
+<rect x="50" y="470" width="470" height="170" fill="#eef3fb" stroke="#7a9cc6" stroke-width="1.3" rx="3"/>
+<text x="62" y="488" font-size="13" text-anchor="start" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">Why the links are logical (no FOREIGN KEY)</text>
+<text x="62" y="512" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">Chosen on purpose — history must outlive the data:</text>
+<text x="62" y="530" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">• a deleted product&#x27;s change history is kept</text>
+<text x="62" y="548" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">• a purged alert&#x27;s broadcast log is kept (audit trail)</text>
+<text x="62" y="566" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">• reset-demo.sql can TRUNCATE each table</text>
+<text x="62" y="584" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">Consistency comes from the trigger and one JDBC</text>
+<text x="62" y="602" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">transaction (alert insert + mark change processed).</text>
+<rect x="50" y="670" width="470" height="130" fill="#f6f6f6" stroke="#aaa" stroke-width="1.3" rx="3"/>
+<text x="62" y="688" font-size="13" text-anchor="start" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">Indexes (for the 2-second polling queries)</text>
+<text x="62" y="712" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">data_changes (processed_at, change_id)  → find new changes</text>
+<text x="62" y="730" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">alerts (status, pushed_status)  → find unsent alerts</text>
+<text x="62" y="748" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">alert_broadcast_log (alert_id)  → history of one alert</text>
+<text x="62" y="766" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">Composite PK on data_change_values (change_id, field_name)</text>
+<rect x="560" y="840" width="890" height="90" fill="#fff" stroke="#999"/>
+<text x="575" y="860" font-size="13" text-anchor="start" font-weight="bold" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">Notation</text>
+<line x1="575" y1="890" x2="625" y2="890" stroke="#000" stroke-width="1.4"/>
+<line x1="617" y1="898" x2="617" y2="882" stroke="#000" stroke-width="1.4"/>
+<line x1="611" y1="898" x2="611" y2="882" stroke="#000" stroke-width="1.4"/>
+<text x="640" y="890" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">exactly one</text>
+<line x1="790" y1="890" x2="840" y2="890" stroke="#000" stroke-width="1.4"/>
+<line x1="832" y1="898" x2="832" y2="882" stroke="#000" stroke-width="1.4"/>
+<circle cx="820" cy="890" r="5" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text x="855" y="890" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">zero or one</text>
+<line x1="1005" y1="890" x2="1055" y2="890" stroke="#000" stroke-width="1.4"/>
+<line x1="1039" y1="890" x2="1055" y2="881" stroke="#000" stroke-width="1.4"/>
+<line x1="1039" y1="890" x2="1055" y2="890" stroke="#000" stroke-width="1.4"/>
+<line x1="1039" y1="890" x2="1055" y2="899" stroke="#000" stroke-width="1.4"/>
+<line x1="1033" y1="898" x2="1033" y2="882" stroke="#000" stroke-width="1.4"/>
+<text x="1070" y="890" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">one or more</text>
+<line x1="1220" y1="890" x2="1270" y2="890" stroke="#000" stroke-width="1.4"/>
+<line x1="1254" y1="890" x2="1270" y2="881" stroke="#000" stroke-width="1.4"/>
+<line x1="1254" y1="890" x2="1270" y2="890" stroke="#000" stroke-width="1.4"/>
+<line x1="1254" y1="890" x2="1270" y2="899" stroke="#000" stroke-width="1.4"/>
+<circle cx="1246" cy="890" r="5" fill="#fff" stroke="#000" stroke-width="1.4"/>
+<text x="1285" y="890" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#000" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">zero or more</text>
+<text x="575" y="915" font-size="12" text-anchor="start" font-weight="normal" font-style="normal" fill="#444" dominant-baseline="middle" font-family="Helvetica, Arial, 'Liberation Sans', FreeSans, sans-serif">PK = primary key   → = refers to another table   dashed line = logical link (no FK constraint)</text>
+</svg>
