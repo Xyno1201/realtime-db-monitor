@@ -3,7 +3,8 @@ rem Usage (from cmd or the Antigravity/PowerShell terminal):
 rem   .\run.cmd server       - the server (poller + TCP server on port 5050)
 rem   .\run.cmd admin        - the Admin window (operator console: alerts, changes, rules, log)
 rem   .\run.cmd employee     - the Employee app (product catalogue: add / edit / delete)
-rem   .\run.cmd dashboard    - text-only test dashboard (until the Swing dashboard exists)
+rem   .\run.cmd client       - the Swing dashboard (live alert cards; run several)
+rem   .\run.cmd dashboard    - text-only test dashboard (test\ConsoleDashboard)
 rem   .\run.cmd checks       - all 4 checks: Phase12, Dao, Rule, Detection (run with the server STOPPED)
 cd /d "%~dp0"
 if not exist out (
@@ -22,6 +23,10 @@ if /i "%~1"=="employee" (
     java -cp "out;lib/*" dbmonitor.employee.EmployeeMain
     goto :eof
 )
+if /i "%~1"=="client" (
+    java -cp "out;lib/*" dbmonitor.client.ClientMain
+    goto :eof
+)
 if /i "%~1"=="dashboard" (
     java -cp "out;lib/*" ConsoleDashboard
     goto :eof
@@ -36,4 +41,4 @@ if /i "%~1"=="checks" (
     java -cp "out;lib/*" DetectionCheck
     goto :eof
 )
-echo Usage: .\run.cmd server ^| admin ^| employee ^| dashboard ^| checks
+echo Usage: .\run.cmd server ^| admin ^| employee ^| client ^| dashboard ^| checks

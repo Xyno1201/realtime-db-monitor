@@ -6,7 +6,7 @@
 > - Any other conflict between this file, v7 and the code: report it to the human. Do not resolve it silently.
 > - **For exact signatures, use `CONTRACT_SNAPSHOT.txt`.** Never rename anything to make it "cleaner".
 >
-> **Updated:** 1 Oct 2026, builder session 3 (Builder A): rules hard-coded, one-script database setup. Every builder updates §2 and §9 at the end of each session.
+> **Updated:** 11 Oct 2026, Builder A: `builder-b` (Swing dashboard) merged into `main` and **live-tested with the real server + MySQL**; PR #1 (Admin alert sorting) recorded. Every builder updates §2 and §9 at the end of each session.
 
 ---
 
@@ -51,9 +51,9 @@ Threshold rules (R1, R6, R7) fire only when the value **crosses** the line: stoc
 
 | Role | Who | Does |
 |---|---|---|
-| **Builder A** | team member 1 (Claude Pro) | Writes code. Built Phases 1–7 and the v8 change detection, rules and operator console. |
-| **Builder B** | team member 2 (Claude Pro) | Writes code. **Next: Phases 8–9 (Swing dashboard)**, see §6. |
-| **Verifiers V1–V3** | other three members | After each major step, run the checks in §7, review against v7 + §0, report issues, and ideate (presentation, viva, demo polish). |
+| **Builder A** | team member 1 (Claude Pro), GitHub `Xyno1201` (repo owner) | Writes code. Built Phases 1–7, the v8 change detection, rules, operator console and Employee app. Merges into `main`. |
+| **Builder B** | team member 2 (Claude Pro), GitHub `RajviKachrola` | Writes code. Built Phases 8–9 (Swing dashboard, `dbmonitor.client`), see §6. |
+| **Verifiers V1–V3** | other three members (one is GitHub `vaishnavivaibhavpatil`, author of PR #1) | After each major step, run the checks in §7, review against v7 + §0, report issues, and ideate (presentation, viva, demo polish). |
 
 **Everyone must still be able to explain every module in the viva.**
 
@@ -69,9 +69,10 @@ Threshold rules (R1, R6, R7) fire only when the value **crosses** the line: stoc
 | v8 | Triggers on `products`; rules engine (`dbmonitor.rules`); `ChangeDetectorThread` | ✅ done | `RuleCheck` 26/26 (no DB); `DetectionCheck` 19/19 (app CRUD → trigger → rule → alert, no double processing); live test: Workbench-style root edits → R2, R5, R6+R7, R8, R9, R10 alerts on the dashboards; `setup.sql` repairs a broken setup (wrong password, junk table) and is safe to re-run |
 | 4 | Admin operator console (4 tabs) + Employee app (separate window), SwingWorker, auto-refresh | ✅ done | Driven by simulated clicks: Employee search + save → CRITICAL alert, add → R9, delete → R5, invalid price dialog, sort by price; Admin Resolve → RESOLVED broadcast. Screenshots in `docs/screenshots/` |
 | 5–7 | `PollerThread`, `BroadcastServer`, `ClientHandler` | ✅ done (unchanged since v7, + broadcast log) | 2 console dashboards, reconnect, port-in-use |
-| 8 | Dashboard networking (`AlertListenerThread`) | ⏳ **next — Builder B** | `test/ConsoleDashboard.java` shows the pattern |
-| 9 | Dashboard GUI (`DashboardFrame`, `AlertCard`, counters) | ⏳ next — Builder B | — |
-| 10 | Full integration + demo script (README "3-minute demo") | ⏳ after 8–9 | — |
+| 8 | Dashboard networking (`AlertListenerThread`, `ClientMain`) | ✅ done (Builder B; live-tested 11 Oct) | **Live (real server + MySQL, 11 Oct):** client started before the server → *Reconnecting ... server not running*, then *Connected* when the server started; 2 dashboards both received every alert (`to 2 dashboard(s)`); server stopped → *server closed the connection* → *Reconnecting*, all cards kept; server restarted → reconnected by itself and received the next alert. Earlier stand-in run: Tested against a stand-in server that writes exactly like `ClientHandler`: started before the server → *Reconnecting*, then connects; server stopped → *Reconnecting*, cards kept; server restarted → reconnects; `shutdown()` ends the thread. `--release 8` compile OK |
+| 9 | Dashboard GUI (`DashboardFrame`, `AlertCard`, counters) | ✅ done (Builder B; live-tested 11 Oct) | **Live (11 Oct):** real Workbench-style edits → cards with the real messages (`'27-inch Monitor': [R2] ... - by root@localhost`, Employee-app edit `by alertapp@localhost`); R1+R2 two-rule message wraps in full; resolve → same card grey, counted under Resolved; `UPDATE products SET stock = 0 WHERE id > 0` → 20 HIGH cards at once, window responsive; counters Critical 3 / High 20 / Low 1 / Resolved 1 / Total 25 = the 25 rows in `alerts`. Earlier stand-in run: Same stand-in run: 4 alert types/severities → 4 cards; duplicate id → same card; RESOLVED → same card grey; 255-char message wraps; burst of 20 → 24 cards, counters Critical 1 / High 20 / Medium 1 / Low 1 / Resolved 1 / Total 24; the view stays on the newest card (scroll 0) through burst, server stop and reconnect |
+| Admin sort | "Sort alerts" drop-down on the Alerts tab (PR #1, verifier) | ✅ done (merged 7 Oct) | 11 Oct: "High priority first" puts CRITICAL above HIGH (newest first within a severity) and stays sorted through the 3 s auto-refresh; selection kept. Display only - the database is not touched |
+| 10 | Full integration + demo script (README "3-minute demo" with `run client`), viva prep | ⏳ **next** | All parts exist and work together (11 Oct live run). Remaining: demo script polish, screenshots of the dashboard, viva Q&A |
 
 **Test environment caveat:** the build sandbox tests on Linux against MySQL 8.0 using the **MariaDB Connector/J** driver, which accepts `jdbc:mysql:` URLs. With that driver, Phase12Check Part C reports BLOCKED, so it was verified separately (41/41). **The team must re-run `.\run.cmd checks` with the real MySQL Connector/J 8.x on Windows** (task V-0 in §7). Builder A's Windows PC passed the v7 checks (36/36) before v8.
 
@@ -98,6 +99,10 @@ Threshold rules (R1, R6, R7) fire only when the value **crosses** the line: stoc
 | D15 | One setup script `sql/setup.sql` (run as root) creates everything and starts from scratch each time; `reset-demo.sql` only resets data | Fewer setup mistakes; a broken setup is fixed by running one file again. |
 | D16 | The update trigger skips updates that change no watched column (`<=>` null-safe compare) | Workbench "Apply" with no real change must not create noise. |
 | D17 | `ProductDAO` validates (no negative price or stock, max 2 decimals, lengths); SQL does not | See D4: the app is strict, and the database isn't. |
+| D18 | Dashboard counters: one per severity counting **open** (not resolved) alerts, plus **Resolved** and **Total**; recomputed from all cards on every update | v7 §39 does not say what is counted. Resolving an alert visibly moves it from its severity to Resolved. |
+| D19 | `AlertListenerThread` checks `received instanceof Alert` once after `readObject()`; anything else is logged and skipped | `readObject()` returns `Object`. This is a wire check, not a type switch: no code in the client tests for a subclass. |
+| D21 | Admin "Sort alerts" (PR #1): display-only sort by severity (No Sorting / High first / Low first), default No Sorting; the sort is stable, so newest-first is kept within a severity, and it survives the auto-refresh | Lets the operator see the worst alerts first without changing what is stored. |
+| D20 | An updated card stays where it is (only new ids go to the top); no card limit, no Clear button | Not specified in v7; nothing was added beyond the spec. |
 
 ---
 
@@ -118,6 +123,7 @@ src/dbmonitor/db/                      ManagedConnection AlertDAO BroadcastLogEn
 src/dbmonitor/server/                  ServerMain ChangeDetectorThread PollerThread BroadcastServer ClientHandler
 src/dbmonitor/admin/                   AdminMain AdminFrame DbTask Renderers + a Panel/TableModel per tab
 src/dbmonitor/employee/                EmployeeMain EmployeeFrame ProductTableModel EmployeeTask
+src/dbmonitor/client/                  ClientMain AlertListenerThread DashboardFrame AlertCard  (Swing dashboard, run client)
 test/                                  Phase12Check DaoCheck RuleCheck DetectionCheck ConsoleDashboard
 CONTRACT_SNAPSHOT.txt                  javap output of every class - the exact API
 ```
@@ -137,11 +143,11 @@ Admin (4 tabs) and Employee app read/write MySQL only - never talk to the server
 
 ## 5. How to run
 
-See `README.md` (fresh install, demo). In short: `.\build.cmd`, then in separate terminals `.\run.cmd server`, `.\run.cmd admin`, `.\run.cmd employee`, `.\run.cmd dashboard`. Self-tests: `.\run.cmd checks`, with the server stopped.
+See `README.md` (fresh install, demo). In short: `.\build.cmd`, then in separate terminals `.\run.cmd server`, `.\run.cmd admin`, `.\run.cmd employee`, `.\run.cmd client` (Swing dashboard; `.\run.cmd dashboard` = text test dashboard). Self-tests: `.\run.cmd checks`, with the server stopped.
 
 ---
 
-## 6. NEXT TASK — Builder B: Phases 8–9, the Swing dashboard
+## 6. DONE (11 Oct) — Builder B: Phases 8–9, the Swing dashboard (kept for reference)
 
 **Still valid after v8:** the dashboard receives `Alert` objects, and the abstract `Alert` API didn't change. Only the concrete types did (RECORD_ADDED / CHANGED / DELETED instead of CPU etc.). A dashboard written against `Alert` needs no change.
 
@@ -214,7 +220,9 @@ See `README.md` (fresh install, demo). In short: `.\build.cmd`, then in separate
 - Not in the repo: `out/` (build output) and `lib/*.jar` (each person downloads Connector/J). `.gitattributes` keeps `.cmd` files CRLF and `.sh` files LF on every machine.
 - **Start each Claude session fresh** with this bundle: v7 + `HANDOFF.md` + `CONTRACT_SNAPSHOT.txt` + the files being worked on + `common/`.
 - **At the end of a session,** the builder asks Claude to update §2, §3 (if new decisions were made) and §9, then commits.
-- **Never work on the same file at the same time** as the other builder. The split is by package: Builder B works in `dbmonitor.client` only for now.
+- **Never work on the same file at the same time** as the other builder. The split is by package: Builder B owns `dbmonitor.client`, Builder A everything else.
+- **Contributions from verifiers** come as Pull Requests (like PR #1). The owner of the package they touch reviews them before merging (PR #1 touched `admin/`, Builder A's package).
+- **After any merge into `main`, everyone updates their branch:** `git checkout <your branch>` → `git pull origin main` → `git push`. Shared files (`README.md`, `build.sh`, `build.cmd`, `run.*`, `HANDOFF.md`) are where conflicts happen. On 11 Oct, PR #1 and `builder-b` both edited `README.md` and `build.sh`, so the merge needed both sides combined by hand.
 
 ---
 
@@ -227,3 +235,6 @@ See `README.md` (fresh install, demo). In short: `.\build.cmd`, then in separate
 | 1 Oct | Builder A | Rules **hard-coded** in `ProductRules.java` (rules file, RuleLoader, `rules.file` key and hot reload removed). The 4 SQL scripts merged into one `sql/setup.sql` (fresh rebuild, resets the alertapp password, ends with a SETUP OK check). Checks updated: 41 / 24 / 26 / 19. Fresh full zip. | V-0 again on Windows from the fresh zip. Builder B: dashboard (§6). GitHub repo still to create. |
 | 1 Oct | Builder A | Products CRUD moved out of the Admin into a **separate Employee app** (`dbmonitor.employee`: search, sortable table, Add / Save / Delete; `run employee`). Admin now has 4 tabs. Screenshots retaken. Checks unchanged (41 / 24 / 26 / 19). | Optional later: record the employee's own name on each change (today the app shows as alertapp@localhost). |
 | 1 Oct | Builder A | Repo prepared for GitHub: `.gitignore` (out/, lib/*.jar), `.gitattributes` (line endings), branches `main` / `builder-a` / `builder-b`. TEAMMATE_SETUP Steps 5 and 11 (clone, branch, daily git routine). | Builder B: start §6 on branch `builder-b`. |
+| 1 Oct | Builder B | **Swing dashboard** (§6), package `dbmonitor.client`: `ClientMain`, `AlertListenerThread`, `DashboardFrame`, `AlertCard`. `run client` added to `run.cmd` / `run.sh`; `client\*.java` added to `build.cmd` / `build.sh`; `run dashboard` stays the text test dashboard. README updated (run list, demo steps 1 and 5, failure demo). `CONTRACT_SNAPSHOT.txt` regenerated (only the 4 client classes added). Decisions D18–D20. Tested against a stand-in server (no MySQL on that PC); no other package touched. | Builder B: run the §6 "Done when" list with the real server + MySQL, then update the Phase 8–9 rows to ✅. D18–D20 need team approval. Windows may show a firewall prompt for Java on first server start: Cancel is fine (localhost only). |
+| 3 Oct | Verifier (`vaishnavivaibhavpatil`) | **PR #1:** "Sort alerts" drop-down on the Admin Alerts tab (`AlertTableModel.SortOrder`, `setSortOrder`; `AlertsPanel`). Also reformatted `build.sh`, made `run.sh` executable, README Admin line. Merged into `main` on 7 Oct by Builder A. | Alerts panel title still says "ALERTS - newest first" while a sort is active (cosmetic). D21 needs team approval. |
+| 11 Oct | Builder A | Merged `builder-b` into `main`: conflicts in `README.md` (kept both the sort note and the dashboard line) and `build.sh` (PR #1 layout + the `client` line). Merged code: strict `--release 8` compile OK, ASCII OK, `setup.sql` SETUP OK, RuleCheck 26 / DaoCheck 24 / DetectionCheck 19 passed, 0 failed. **Dashboard live-tested** with the real server + MySQL (see §2 rows 8–9). `CONTRACT_SNAPSHOT.txt` regenerated (client classes + `AlertTableModel.SortOrder`). Phases 8–9 → ✅. | D18–D21 need team approval. Next: Phase 10 (demo script with `run client`, dashboard screenshots, viva prep). Optional polish: dashboard card shows the type twice (`[CHG]` + `Record Changed`). |
